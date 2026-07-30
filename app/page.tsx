@@ -22,7 +22,7 @@ export default function HomePage() {
               Pulling together, wherever we are.
             </h1>
             <p className="text-ink/80 max-w-md">
-              Events, contributions, and community — all in one place for
+              Events, contributions, and community - all in one place for
               every member of the Sirisia Alumni Class.
             </p>
           </div>
