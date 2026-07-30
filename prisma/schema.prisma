@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  member
+  organizer
+  treasurer
+  admin
+}
+
+enum ContributionStatus {
+  pending
+  matched
+  unmatched
+}
+
+model Member {
+  id           String   @id @default(uuid())
+  fullName     String
+  phoneNumber  String   @unique
+  classYear    String?
+  role         Role     @default(member)
+  createdAt    DateTime @default(now())
+
+  contributions Contribution[]
+  rsvps         Rsvp[]
+  posts         Post[]
+}
+
+model Target {
+  id            String   @id @default(uuid())
+  title         String
+  goalAmount    Decimal
+  currentTotal  Decimal  @default(0)
+  deadline      DateTime?
+  createdAt     DateTime @default(now())
+
+  contributions Contribution[]
+}
+
+model Contribution {
+  id            String             @id @default(uuid())
+  member        Member?            @relation(fields: [memberId], references: [id])
+  memberId      String?
+  target        Target             @relation(fields: [targetId], references: [id])
+  targetId      String
+  amount        Decimal
+  mpesaReceipt  String?            @unique
+  payerPhone    String
+  status        ContributionStatus @default(pending)
+  paidAt        DateTime           @default(now())
+}
+
+model Event {
+  id         String   @id @default(uuid())
+  title      String
+  eventDate  DateTime
+  location   String?
+  createdAt  DateTime @default(now())
+
+  rsvps  Rsvp[]
+  photos Photo[]
+}
+
+model Rsvp {
+  id       String  @id @default(uuid())
+  event    Event   @relation(fields: [eventId], references: [id])
+  eventId  String
+  member   Member  @relation(fields: [memberId], references: [id])
+  memberId String
+  attending Boolean @default(true)
+
+  @@unique([eventId, memberId])
+}
+
+model Photo {
+  id       String @id @default(uuid())
+  event    Event  @relation(fields: [eventId], references: [id])
+  eventId  String
+  imageUrl String
+}
+
+model Post {
+  id        String   @id @default(uuid())
+  member    Member   @relation(fields: [memberId], references: [id])
+  memberId  String
+  topic     String
+  body      String
+  createdAt DateTime @default(now())
+}
