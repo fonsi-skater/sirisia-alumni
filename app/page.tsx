@@ -22,7 +22,7 @@ export default function HomePage() {
               Pulling together, wherever we are.
             </h1>
             <p className="text-ink/80 max-w-md">
-              Events, contributions, and community - all in one place for
+              Events, contributions, and community — all in one place for
               every member of the Sirisia Alumni Class.
             </p>
           </div>
@@ -36,7 +36,7 @@ export default function HomePage() {
 
         <section className="grid sm:grid-cols-3 gap-5 pb-16">
           {quickLinks.map((link) => (
-            
+            <a
               key={link.href}
               href={link.href}
               className="glass rounded-xl p-5 hover:!bg-white/55 transition-colors"
