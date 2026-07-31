@@ -165,3 +165,21 @@ export const mockMeetings: MeetingItem[] = [
     agenda: 'Reunion budget, venue decision, and library fund progress.',
   },
 ];
+
+export type MemberProfile = {
+  id: string;
+  fullName: string;
+  classYear: string;
+  role: 'member' | 'organizer' | 'treasurer' | 'admin';
+  location: string;
+  occupation: string;
+};
+
+export const mockMembers: MemberProfile[] = [
+  { id: 'mem1', fullName: 'Grace Wanjiru', classYear: '2010', role: 'treasurer', location: 'Kitale', occupation: 'Accountant' },
+  { id: 'mem2', fullName: 'Peter Barasa', classYear: '2010', role: 'organizer', location: 'Nairobi', occupation: 'Civil Engineer' },
+  { id: 'mem3', fullName: 'Mary Nafula', classYear: '2011', role: 'member', location: 'Bungoma', occupation: 'Teacher' },
+  { id: 'mem4', fullName: 'Alphonce Otieno', classYear: '2010', role: 'admin', location: 'Nairobi', occupation: 'Software Engineer' },
+  { id: 'mem5', fullName: 'Susan Nekesa', classYear: '2012', role: 'member', location: 'Eldoret', occupation: 'Nurse' },
+  { id: 'mem6', fullName: 'James Wafula', classYear: '2011', role: 'member', location: 'Kisumu', occupation: 'Sales Manager' },
+];
