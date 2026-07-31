@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss';
+﻿import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
@@ -8,13 +8,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Placeholder brand tokens — we'll set the real palette
-        // when we design the actual UI in the next step.
-        brand: {
-          DEFAULT: '#1D9E75',
-          dark: '#085041',
-          light: '#9FE1CB',
+        blue: {
+          DEFAULT: '#2B5A8C',
+          dark: '#173654',
+          light: '#B7D2E8',
         },
+        pink: {
+          DEFAULT: '#D9668B',
+          dark: '#A83E5F',
+          light: '#F2C6D3',
+        },
+        ink: '#1F2933',
       },
       fontFamily: {
         sans: ['var(--font-sans)'],

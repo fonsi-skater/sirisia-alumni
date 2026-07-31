@@ -18,3 +18,8 @@
     box-shadow: 0 8px 32px rgba(31, 78, 121, 0.14);
   }
 }
+
+body {
+  background: linear-gradient(160deg, #F7EFE7 0%, #EFE3F0 50%, #E4EDF5 100%);
+  min-height: 100vh;
+}
