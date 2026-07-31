@@ -302,7 +302,7 @@ code,
 kbd,
 samp,
 pre {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
+  font-family: var(--font-mono); /* 1 */
   font-feature-settings: normal; /* 2 */
   font-variation-settings: normal; /* 3 */
   font-size: 1em; /* 4 */
@@ -771,11 +771,17 @@ video {
 .mb-4 {
   margin-bottom: 1rem;
 }
+.mt-0\.5 {
+  margin-top: 0.125rem;
+}
 .mt-1 {
   margin-top: 0.25rem;
 }
 .mt-16 {
   margin-top: 4rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
 }
 .mt-3 {
   margin-top: 0.75rem;
@@ -840,6 +846,9 @@ video {
 .flex-1 {
   flex: 1 1 0%;
 }
+.shrink-0 {
+  flex-shrink: 0;
+}
 .-translate-y-2 {
   --tw-translate-y: -0.5rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -862,17 +871,29 @@ video {
 .flex-wrap {
   flex-wrap: wrap;
 }
+.items-start {
+  align-items: flex-start;
+}
 .items-center {
   align-items: center;
 }
 .items-baseline {
   align-items: baseline;
 }
+.justify-center {
+  justify-content: center;
+}
 .justify-between {
   justify-content: space-between;
 }
 .gap-10 {
   gap: 2.5rem;
+}
+.gap-2 {
+  gap: 0.5rem;
+}
+.gap-4 {
+  gap: 1rem;
 }
 .gap-5 {
   gap: 1.25rem;
@@ -895,6 +916,9 @@ video {
 }
 .rounded-full {
   border-radius: 9999px;
+}
+.rounded-lg {
+  border-radius: 0.5rem;
 }
 .rounded-sm {
   border-radius: 0.125rem;
@@ -920,11 +944,18 @@ video {
 .border-t-4 {
   border-top-width: 4px;
 }
+.border-blue\/40 {
+  border-color: rgb(31 78 121 / 0.4);
+}
 .border-ink\/10 {
-  border-color: rgb(31 41 51 / 0.1);
+  border-color: rgb(36 35 42 / 0.1);
+}
+.border-pink {
+  --tw-border-opacity: 1;
+  border-color: rgb(194 68 126 / var(--tw-border-opacity));
 }
 .border-pink\/40 {
-  border-color: rgb(217 102 139 / 0.4);
+  border-color: rgb(194 68 126 / 0.4);
 }
 .border-white\/30 {
   border-color: rgb(255 255 255 / 0.3);
@@ -937,34 +968,38 @@ video {
 }
 .\!border-b-pink {
   --tw-border-opacity: 1 !important;
-  border-bottom-color: rgb(217 102 139 / var(--tw-border-opacity)) !important;
+  border-bottom-color: rgb(194 68 126 / var(--tw-border-opacity)) !important;
 }
 .\!border-t-pink {
   --tw-border-opacity: 1 !important;
-  border-top-color: rgb(217 102 139 / var(--tw-border-opacity)) !important;
+  border-top-color: rgb(194 68 126 / var(--tw-border-opacity)) !important;
 }
 .bg-blue {
   --tw-bg-opacity: 1;
-  background-color: rgb(43 90 140 / var(--tw-bg-opacity));
+  background-color: rgb(31 78 121 / var(--tw-bg-opacity));
 }
 .bg-blue-light\/20 {
-  background-color: rgb(183 210 232 / 0.2);
+  background-color: rgb(74 127 181 / 0.2);
 }
 .bg-blue-light\/40 {
-  background-color: rgb(183 210 232 / 0.4);
+  background-color: rgb(74 127 181 / 0.4);
 }
 .bg-blue\/20 {
-  background-color: rgb(43 90 140 / 0.2);
+  background-color: rgb(31 78 121 / 0.2);
+}
+.bg-parchment {
+  --tw-bg-opacity: 1;
+  background-color: rgb(246 243 239 / var(--tw-bg-opacity));
 }
 .bg-pink {
   --tw-bg-opacity: 1;
-  background-color: rgb(217 102 139 / var(--tw-bg-opacity));
+  background-color: rgb(194 68 126 / var(--tw-bg-opacity));
 }
 .bg-pink-light\/30 {
-  background-color: rgb(242 198 211 / 0.3);
+  background-color: rgb(232 147 183 / 0.3);
 }
 .bg-pink-light\/40 {
-  background-color: rgb(242 198 211 / 0.4);
+  background-color: rgb(232 147 183 / 0.4);
 }
 .bg-white\/40 {
   background-color: rgb(255 255 255 / 0.4);
@@ -1000,6 +1035,10 @@ video {
   padding-top: 0.125rem;
   padding-bottom: 0.125rem;
 }
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
 .py-10 {
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
@@ -1033,10 +1072,14 @@ video {
   font-family: var(--font-display);
 }
 .font-mono {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: var(--font-mono);
 }
 .font-sans {
   font-family: var(--font-sans);
+}
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 .text-3xl {
   font-size: 1.875rem;
@@ -1045,6 +1088,9 @@ video {
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
+}
+.text-\[10px\] {
+  font-size: 10px;
 }
 .text-lg {
   font-size: 1.125rem;
@@ -1071,6 +1117,9 @@ video {
 .capitalize {
   text-transform: capitalize;
 }
+.leading-none {
+  line-height: 1;
+}
 .leading-tight {
   line-height: 1.25;
 }
@@ -1082,27 +1131,37 @@ video {
 }
 .text-blue-dark {
   --tw-text-opacity: 1;
-  color: rgb(23 54 84 / var(--tw-text-opacity));
+  color: rgb(22 58 92 / var(--tw-text-opacity));
 }
 .text-ink {
   --tw-text-opacity: 1;
-  color: rgb(31 41 51 / var(--tw-text-opacity));
+  color: rgb(36 35 42 / var(--tw-text-opacity));
 }
 .text-ink\/60 {
-  color: rgb(31 41 51 / 0.6);
+  color: rgb(36 35 42 / 0.6);
 }
 .text-ink\/70 {
-  color: rgb(31 41 51 / 0.7);
+  color: rgb(36 35 42 / 0.7);
 }
 .text-ink\/80 {
-  color: rgb(31 41 51 / 0.8);
+  color: rgb(36 35 42 / 0.8);
+}
+.text-parchment {
+  --tw-text-opacity: 1;
+  color: rgb(246 243 239 / var(--tw-text-opacity));
 }
 .text-pink-dark {
   --tw-text-opacity: 1;
-  color: rgb(168 62 95 / var(--tw-text-opacity));
+  color: rgb(156 53 100 / var(--tw-text-opacity));
+}
+.opacity-60 {
+  opacity: 0.6;
 }
 .blur-3xl {
   --tw-blur: blur(64px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .transition-colors {
@@ -1124,13 +1183,19 @@ body {
   background-color: rgb(255 255 255 / 0.55) !important;
 }
 
-.hover\:text-pink-dark:hover {
-  --tw-text-opacity: 1;
-  color: rgb(168 62 95 / var(--tw-text-opacity));
+.hover\:bg-blue:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 78 121 / var(--tw-bg-opacity));
 }
 
-.hover\:text-pink-dark\/70:hover {
-  color: rgb(168 62 95 / 0.7);
+.hover\:text-parchment:hover {
+  --tw-text-opacity: 1;
+  color: rgb(246 243 239 / var(--tw-text-opacity));
+}
+
+.hover\:text-pink-dark:hover {
+  --tw-text-opacity: 1;
+  color: rgb(156 53 100 / var(--tw-text-opacity));
 }
 
 @media (min-width: 640px) {

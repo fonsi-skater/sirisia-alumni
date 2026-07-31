@@ -95,3 +95,73 @@ export const mockEvents: EventItem[] = [
     attendeeCount: 15,
   },
 ];
+
+export type Photo = {
+  id: string;
+  eventTitle: string;
+  imageUrl: string;
+  caption: string;
+};
+
+export const mockPhotos: Photo[] = [
+  { id: 'p1', eventTitle: 'Mid-year get-together', imageUrl: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600&q=80', caption: 'Classmates catching up in Kitale' },
+  { id: 'p2', eventTitle: 'Mid-year get-together', imageUrl: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80', caption: 'Group photo before lunch' },
+  { id: 'p3', eventTitle: 'Library fundraising walk (2025)', imageUrl: 'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=600&q=80', caption: 'The walk sets off from town' },
+  { id: 'p4', eventTitle: 'End-of-year reunion (2025)', imageUrl: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80', caption: 'Speeches at the reunion' },
+  { id: 'p5', eventTitle: 'End-of-year reunion (2025)', imageUrl: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?w=600&q=80', caption: 'Dinner and dancing' },
+  { id: 'p6', eventTitle: 'Committee planning day', imageUrl: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600&q=80', caption: 'Committee members mapping out the year' },
+];
+
+export type ForumTopic = {
+  id: string;
+  title: string;
+  author: string;
+  body: string;
+  replyCount: number;
+  lastActivity: string;
+};
+
+export const mockForumTopics: ForumTopic[] = [
+  {
+    id: 'f1',
+    title: 'Reunion venue — school grounds or a hotel this year?',
+    author: 'Peter Barasa',
+    body: "We've done the school grounds twice now. Curious if people want a change of scenery this time, even if it costs a bit more.",
+    replyCount: 14,
+    lastActivity: '2026-07-29',
+  },
+  {
+    id: 'f2',
+    title: 'Proposal: quarterly instead of annual contributions reminder',
+    author: 'Grace Wanjiru',
+    body: "Some of us keep forgetting to contribute until right before a deadline. Would a gentle SMS every quarter help, or is that too much?",
+    replyCount: 9,
+    lastActivity: '2026-07-27',
+  },
+  {
+    id: 'f3',
+    title: "Congratulations to Mary Nafula's daughter — KCSE results",
+    author: 'Mary Nafula',
+    body: 'Sharing some good news — my daughter got an A- in her KCSE. Thank you all for the encouragement over the years.',
+    replyCount: 22,
+    lastActivity: '2026-07-25',
+  },
+];
+
+export type MeetingItem = {
+  id: string;
+  title: string;
+  dateTime: string;
+  joinUrl: string;
+  agenda: string;
+};
+
+export const mockMeetings: MeetingItem[] = [
+  {
+    id: 'm1',
+    title: 'Committee planning call',
+    dateTime: '2026-08-10T20:00:00',
+    joinUrl: 'https://meet.jit.si/SirisiaAlumniAug2026',
+    agenda: 'Reunion budget, venue decision, and library fund progress.',
+  },
+];
