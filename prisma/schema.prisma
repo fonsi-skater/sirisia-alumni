@@ -97,3 +97,14 @@ model Post {
   body      String
   createdAt DateTime @default(now())
 }
+
+model OtpCode {
+  id          String    @id @default(uuid())
+  phoneNumber String
+  code        String
+  expiresAt   DateTime
+  usedAt      DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@index([phoneNumber])
+}

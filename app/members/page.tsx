@@ -1,6 +1,9 @@
-import { Navbar } from '@/components/layout/Navbar';
+﻿import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { AddMemberForm } from '@/components/ui/AddMemberForm';
 import { prisma } from '@/lib/db';
+import { getCurrentMember, SESSION_COOKIE } from '@/lib/session';
+import { cookies } from 'next/headers';
 
 export const dynamic = 'force-dynamic';
 
@@ -21,21 +24,35 @@ function initials(name: string) {
 }
 
 export default async function MembersPage() {
-  const members = await prisma.member.findMany({ orderBy: { fullName: 'asc' } });
+  const token = cookies().get(SESSION_COOKIE)?.value;
+  
+  const [members, currentMember] = await Promise.all([
+    prisma.member.findMany({ orderBy: { fullName: 'asc' } }),
+    getCurrentMember(token),
+  ]);
+  const canManage = currentMember && ['admin', 'treasurer'].includes(currentMember.role);
 
   return (
     <>
       <Navbar />
       <main className="max-w-5xl mx-auto px-4 sm:px-6 py-12">
-        <div className="glass rounded-xl p-6 mb-10">
-          <p className="font-mono text-xs uppercase tracking-wide text-pink-dark mb-2">
-            Directory
-          </p>
-          <h1 className="font-display text-3xl text-blue-dark mb-2">Members</h1>
-          <p className="text-ink/70 text-sm max-w-xl">
-            Every registered member of the Sirisia Alumni Class ({members.length} total).
-          </p>
+        <div className="glass rounded-xl p-6 mb-6 flex items-start justify-between gap-4 flex-wrap">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-wide text-pink-dark mb-2">
+              Directory
+            </p>
+            <h1 className="font-display text-3xl text-blue-dark mb-2">Members</h1>
+            <p className="text-ink/70 text-sm max-w-xl">
+              Every registered member of the Sirisia Alumni Class ({members.length} total).
+            </p>
+          </div>
         </div>
+
+        {canManage && (
+          <div className="mb-6">
+            <AddMemberForm />
+          </div>
+        )}
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {members.map((member, i) => (
