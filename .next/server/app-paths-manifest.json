@@ -1,8 +1,0 @@
-{
-  "/events/page": "app/events/page.js",
-  "/contributions/page": "app/contributions/page.js",
-  "/gallery/page": "app/gallery/page.js",
-  "/forum/page": "app/forum/page.js",
-  "/meetings/page": "app/meetings/page.js",
-  "/members/page": "app/members/page.js"
-}
