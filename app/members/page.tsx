@@ -1,9 +1,8 @@
-﻿import { Navbar } from '@/components/layout/Navbar';
+import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { AddMemberForm } from '@/components/ui/AddMemberForm';
 import { prisma } from '@/lib/db';
-import { getCurrentMember, SESSION_COOKIE } from '@/lib/session';
-import { cookies } from 'next/headers';
+import { isAdmin } from '@/lib/admin-session';
 
 export const dynamic = 'force-dynamic';
 
@@ -24,13 +23,8 @@ function initials(name: string) {
 }
 
 export default async function MembersPage() {
-  const token = cookies().get(SESSION_COOKIE)?.value;
-  
-  const [members, currentMember] = await Promise.all([
-    prisma.member.findMany({ orderBy: { fullName: 'asc' } }),
-    getCurrentMember(token),
-  ]);
-  const canManage = currentMember && ['admin', 'treasurer'].includes(currentMember.role);
+  const members = await prisma.member.findMany({ orderBy: { fullName: 'asc' } });
+  const canManage = isAdmin();
 
   return (
     <>

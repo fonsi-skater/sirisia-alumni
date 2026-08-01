@@ -1,6 +1,5 @@
-﻿import Link from 'next/link';
-import { cookies } from 'next/headers';
-import { getCurrentMember, SESSION_COOKIE } from '@/lib/session';
+import Link from 'next/link';
+import { isAdmin } from '@/lib/admin-session';
 
 const links = [
   { href: '/events', label: 'Events' },
@@ -11,9 +10,8 @@ const links = [
   { href: '/members', label: 'Members' },
 ];
 
-export async function Navbar() {
-  const token = cookies().get(SESSION_COOKIE)?.value;
-  const member = await getCurrentMember(token);
+export function Navbar() {
+  const admin = isAdmin();
 
   return (
     <header className="glass-strong sticky top-0 z-20 border-b-4 !border-b-pink">
@@ -27,24 +25,21 @@ export async function Navbar() {
               {link.label}
             </Link>
           ))}
-          {member ? (
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-ink/60">Hi, {member.fullName.split(' ')[0]}</span>
-              <form action="/api/auth/logout" method="post">
-                <button
-                  type="submit"
-                  className="font-mono text-xs text-pink-dark border border-pink/40 rounded-full px-3 py-1 hover:bg-pink hover:text-parchment transition-colors"
-                >
-                  Log out
-                </button>
-              </form>
-            </div>
+          {admin ? (
+            <form action="/api/auth/admin-logout" method="post">
+              <button
+                type="submit"
+                className="font-mono text-xs text-pink-dark border border-pink/40 rounded-full px-3 py-1 hover:bg-pink hover:text-parchment transition-colors"
+              >
+                Log out (admin)
+              </button>
+            </form>
           ) : (
             <Link
-              href="/login"
+              href="/admin-login"
               className="font-mono text-xs text-blue-dark border border-blue/40 rounded-full px-3 py-1 hover:bg-blue hover:text-parchment transition-colors"
             >
-              Log in
+              Admin login
             </Link>
           )}
         </nav>
