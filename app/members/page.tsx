@@ -1,6 +1,8 @@
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { mockMembers } from '@/lib/mock-data';
+import { prisma } from '@/lib/db';
+
+export const dynamic = 'force-dynamic';
 
 const roleStyles: Record<string, string> = {
   admin: 'text-pink-dark bg-pink-light/30',
@@ -18,7 +20,9 @@ function initials(name: string) {
     .toUpperCase();
 }
 
-export default function MembersPage() {
+export default async function MembersPage() {
+  const members = await prisma.member.findMany({ orderBy: { fullName: 'asc' } });
+
   return (
     <>
       <Navbar />
@@ -29,12 +33,12 @@ export default function MembersPage() {
           </p>
           <h1 className="font-display text-3xl text-blue-dark mb-2">Members</h1>
           <p className="text-ink/70 text-sm max-w-xl">
-            Every registered member of the Sirisia Alumni Class.
+            Every registered member of the Sirisia Alumni Class ({members.length} total).
           </p>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {mockMembers.map((member, i) => (
+          {members.map((member, i) => (
             <div key={member.id} className="glass rounded-xl p-4 flex gap-3 items-start">
               <div
                 className={`shrink-0 w-11 h-11 rounded-full flex items-center justify-center font-display text-sm text-parchment ${
@@ -51,9 +55,8 @@ export default function MembersPage() {
                   </span>
                 </div>
                 <p className="text-xs text-ink/70 mt-0.5">
-                  Class of {member.classYear} · {member.location}
+                  {member.classYear ? `Class of ${member.classYear}` : 'Class year not set'}
                 </p>
-                <p className="text-xs text-ink/60 mt-0.5">{member.occupation}</p>
               </div>
             </div>
           ))}

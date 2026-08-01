@@ -54,6 +54,23 @@ async function main() {
   }
 
   console.log(`\nSeeding complete. ${members.length} members and ${targets.length} funds processed.`);
+
+  const events = [
+    { title: 'End-of-year reunion', eventDate: new Date('2026-11-15T11:00:00'), location: 'Sirisia Boys Secondary School grounds', description: 'Our biggest gathering of the year — food, speeches, and catching up with classmates from every stream.' },
+    { title: 'Library fundraising walk', eventDate: new Date('2026-09-20T07:00:00'), location: 'Sirisia town centre', description: 'A short community walk to raise visibility (and a bit more cash) for the library fund.' },
+    { title: 'Virtual planning meeting', eventDate: new Date('2026-08-10T20:00:00'), location: 'Online', description: 'Committee and general members discuss the reunion budget and logistics.' },
+    { title: 'Mid-year get-together', eventDate: new Date('2026-06-14T12:00:00'), location: "Grace Wanjiru's home, Kitale", description: 'A smaller, informal catch-up hosted by classmates in the Kitale area.' },
+  ];
+
+  for (const e of events) {
+    const existing = await prisma.event.findFirst({ where: { title: e.title } });
+    if (existing) {
+      console.log(`Skipping event "${e.title}" — already exists`);
+      continue;
+    }
+    const created = await prisma.event.create({ data: e });
+    console.log(`Created event: ${created.title}`);
+  }
 }
 
 main()

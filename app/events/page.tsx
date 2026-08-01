@@ -1,16 +1,19 @@
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { EventCard } from '@/components/ui/EventCard';
-import { mockEvents } from '@/lib/mock-data';
+import { prisma } from '@/lib/db';
 
-export default function EventsPage() {
-  const today = new Date();
-  const upcoming = mockEvents
-    .filter((e) => new Date(e.date) >= today)
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-  const past = mockEvents
-    .filter((e) => new Date(e.date) < today)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+export const dynamic = 'force-dynamic';
+
+export default async function EventsPage() {
+  const events = await prisma.event.findMany({
+    include: { _count: { select: { rsvps: true } } },
+    orderBy: { eventDate: 'asc' },
+  });
+
+  const now = new Date();
+  const upcoming = events.filter((e) => e.eventDate >= now);
+  const past = events.filter((e) => e.eventDate < now).sort((a, b) => b.eventDate.getTime() - a.eventDate.getTime());
 
   return (
     <>
@@ -31,7 +34,14 @@ export default function EventsPage() {
           <h2 className="font-display text-xl text-blue-dark mb-4">Upcoming</h2>
           <div className="grid gap-4">
             {upcoming.map((event) => (
-              <EventCard key={event.id} event={event} />
+              <EventCard
+                key={event.id}
+                title={event.title}
+                eventDate={event.eventDate}
+                location={event.location}
+                description={event.description}
+                attendeeCount={event._count.rsvps}
+              />
             ))}
             {upcoming.length === 0 && (
               <p className="text-ink/60 text-sm">No upcoming events yet — check back soon.</p>
@@ -44,9 +54,17 @@ export default function EventsPage() {
             <h2 className="font-display text-xl text-blue-dark mb-4">Past events</h2>
             <div className="grid gap-4">
               {past.map((event) => (
-                <EventCard key={event.id} event={event} isPast />
+                <EventCard
+                  key={event.id}
+                  title={event.title}
+                  eventDate={event.eventDate}
+                  location={event.location}
+                  description={event.description}
+                  attendeeCount={event._count.rsvps}
+                  isPast
+                />
               ))}
-          </div>
+            </div>
           </section>
         )}
       </main>
