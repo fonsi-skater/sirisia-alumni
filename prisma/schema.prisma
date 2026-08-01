@@ -23,12 +23,15 @@ enum ContributionStatus {
 }
 
 model Member {
-  id           String   @id @default(uuid())
-  fullName     String
-  phoneNumber  String   @unique
-  classYear    String?
-  role         Role     @default(member)
-  createdAt    DateTime @default(now())
+  id                String   @id @default(uuid())
+  fullName          String
+  phoneNumber       String   @unique
+  classYear         String?
+  role              Role     @default(member)
+  tag               String?
+  occupation        String?
+  profilePictureUrl String?
+  createdAt         DateTime @default(now())
 
   contributions Contribution[]
   rsvps         Rsvp[]
