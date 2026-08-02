@@ -20,7 +20,6 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     data: { memberId: null },
   });
   await prisma.rsvp.deleteMany({ where: { memberId: member.id } });
-  await prisma.post.deleteMany({ where: { memberId: member.id } });
   await prisma.member.delete({ where: { id: member.id } });
 
   return NextResponse.json({ ok: true });
