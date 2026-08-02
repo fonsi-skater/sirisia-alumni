@@ -16,7 +16,8 @@ export function Navbar() {
   return (
     <header className="glass-strong sticky top-0 z-20 border-b-4 !border-b-pink">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="font-display text-lg tracking-tight text-blue-dark">
+        <Link href="/" className="flex items-center gap-2 font-display text-lg tracking-tight text-blue-dark">
+          <img src="/logo.jpg" alt="" className="h-8 w-8 rounded-full object-cover border border-white/60" />
           Sirisia Alumni Class
         </Link>
         <nav className="hidden md:flex gap-6 text-sm items-center">

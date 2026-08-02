@@ -9,9 +9,6 @@ const statusStyles: Record<string, string> = {
   pending: 'text-ink/60 bg-white/40',
 };
 
-// Re-fetch on every request rather than caching a static build —
-// contribution totals change whenever a payment lands, so this
-// page should never serve stale numbers.
 export const dynamic = 'force-dynamic';
 
 export default async function ContributionsPage() {
@@ -33,11 +30,15 @@ export default async function ContributionsPage() {
             Live totals
           </p>
           <h1 className="font-display text-3xl text-blue-dark mb-2">Contributions</h1>
-          <p className="text-ink/70 text-sm max-w-xl">
+          <p className="text-ink/70 text-sm max-w-xl mb-4">
             Every fund below updates automatically as members pay via our
             till. Amounts that can't be auto-matched to a name are shown as
             unmatched until a treasurer confirms them.
           </p>
+          <div className="inline-flex items-center gap-2 bg-blue text-parchment rounded-full px-4 py-2 font-mono text-sm">
+            <span className="opacity-80">M-Pesa Buy Goods Till:</span>
+            <span className="font-semibold tracking-wide">6411666</span>
+          </div>
         </div>
 
         <section className="grid sm:grid-cols-2 gap-6 mb-12">
@@ -68,7 +69,7 @@ export default async function ContributionsPage() {
                     <th className="pb-2 font-normal">Amount</th>
                     <th className="pb-2 font-normal">Status</th>
                     <th className="pb-2 font-normal">Date</th>
-                  </tr>
+                </tr>
                 </thead>
                 <tbody>
                   {recentContributions.map((c) => (

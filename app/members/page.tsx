@@ -1,6 +1,7 @@
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { AddMemberForm } from '@/components/ui/AddMemberForm';
+import { RemoveMemberButton } from '@/components/ui/RemoveMemberButton';
 import { prisma } from '@/lib/db';
 import { isAdmin } from '@/lib/admin-session';
 
@@ -51,23 +52,38 @@ export default async function MembersPage() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {members.map((member, i) => (
             <div key={member.id} className="glass rounded-xl p-4 flex gap-3 items-start">
-              <div
-                className={`shrink-0 w-11 h-11 rounded-full flex items-center justify-center font-display text-sm text-parchment ${
-                  i % 2 === 0 ? 'bg-blue' : 'bg-pink'
-                }`}
-              >
-                {initials(member.fullName)}
-              </div>
-              <div className="min-w-0">
+              {member.profilePictureUrl ? (
+                <img
+                  src={member.profilePictureUrl}
+                  alt={member.fullName}
+                  className="shrink-0 w-11 h-11 rounded-full object-cover border border-white/60"
+                />
+              ) : (
+                <div
+                  className={`shrink-0 w-11 h-11 rounded-full flex items-center justify-center font-display text-sm text-parchment ${
+                    i % 2 === 0 ? 'bg-blue' : 'bg-pink'
+                  }`}
+                >
+                  {initials(member.fullName)}
+                </div>
+              )}
+              <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2 flex-wrap">
                   <h3 className="font-display text-base text-blue-dark truncate">{member.fullName}</h3>
                   <span className={`font-mono text-[10px] uppercase rounded-full px-2 py-0.5 ${roleStyles[member.role]}`}>
                     {member.role}
                   </span>
+                  {member.tag && (
+                    <span className="font-mono text-[10px] text-blue-dark bg-blue-light/20 rounded-full px-2 py-0.5">
+                      {member.tag}
+                    </span>
+                  )}
                 </div>
                 <p className="text-xs text-ink/70 mt-0.5">
                   {member.classYear ? `Class of ${member.classYear}` : 'Class year not set'}
                 </p>
+                {member.occupation && <p className="text-xs text-ink/60 mt-0.5">{member.occupation}</p>}
+                {canManage && <RemoveMemberButton id={member.id} name={member.fullName} />}
               </div>
             </div>
           ))}

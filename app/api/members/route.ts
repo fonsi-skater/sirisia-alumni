@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Not authorized' }, { status: 403 });
   }
 
-  const { fullName, phoneNumber, classYear } = await req.json();
+  const { fullName, phoneNumber, classYear, tag, occupation, profilePictureUrl } = await req.json();
   if (!fullName || !phoneNumber) {
     return NextResponse.json({ error: 'Full name and phone number required' }, { status: 400 });
   }
@@ -21,7 +21,14 @@ export async function POST(req: NextRequest) {
   }
 
   const member = await prisma.member.create({
-    data: { fullName, phoneNumber: normalized, classYear: classYear || null },
+    data: {
+      fullName,
+      phoneNumber: normalized,
+      classYear: classYear || null,
+      tag: tag || null,
+      occupation: occupation || null,
+      profilePictureUrl: profilePictureUrl || null,
+    },
   });
 
   return NextResponse.json({ ok: true, member });
