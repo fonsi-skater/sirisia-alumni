@@ -35,7 +35,6 @@ model Member {
 
   contributions Contribution[]
   rsvps         Rsvp[]
-  posts         Post[]
 }
 
 model Target {
@@ -93,12 +92,11 @@ model Photo {
 }
 
 model Post {
-  id        String   @id @default(uuid())
-  member    Member   @relation(fields: [memberId], references: [id])
-  memberId  String
-  topic     String
-  body      String
-  createdAt DateTime @default(now())
+  id         String   @id @default(uuid())
+  authorName String
+  topic      String
+  body       String
+  createdAt  DateTime @default(now())
 }
 
 model Meeting {
