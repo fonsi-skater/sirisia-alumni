@@ -101,6 +101,15 @@ model Post {
   createdAt DateTime @default(now())
 }
 
+model Meeting {
+  id        String   @id @default(uuid())
+  title     String
+  dateTime  DateTime
+  joinUrl   String
+  agenda    String?
+  createdAt DateTime @default(now())
+}
+
 model OtpCode {
   id          String    @id @default(uuid())
   phoneNumber String
