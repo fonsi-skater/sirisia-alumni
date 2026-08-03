@@ -6,10 +6,13 @@ import { prisma } from '@/lib/db';
 export const dynamic = 'force-dynamic';
 
 export default async function EventsPage() {
-  const events = await prisma.event.findMany({
-    include: { _count: { select: { rsvps: true } } },
-    orderBy: { eventDate: 'asc' },
-  });
+  const [events, members] = await Promise.all([
+    prisma.event.findMany({
+      include: { rsvps: { select: { memberId: true } } },
+      orderBy: { eventDate: 'asc' },
+    }),
+    prisma.member.findMany({ select: { id: true, fullName: true }, orderBy: { fullName: 'asc' } }),
+  ]);
 
   const now = new Date();
   const upcoming = events.filter((e) => e.eventDate >= now);
@@ -36,11 +39,14 @@ export default async function EventsPage() {
             {upcoming.map((event) => (
               <EventCard
                 key={event.id}
+                id={event.id}
                 title={event.title}
                 eventDate={event.eventDate}
                 location={event.location}
                 description={event.description}
-                attendeeCount={event._count.rsvps}
+                attendeeCount={event.rsvps.length}
+                members={members}
+                rsvpMemberIds={event.rsvps.map((r) => r.memberId)}
               />
             ))}
             {upcoming.length === 0 && (
@@ -56,11 +62,12 @@ export default async function EventsPage() {
               {past.map((event) => (
                 <EventCard
                   key={event.id}
+                  id={event.id}
                   title={event.title}
                   eventDate={event.eventDate}
                   location={event.location}
                   description={event.description}
-                  attendeeCount={event._count.rsvps}
+                  attendeeCount={event.rsvps.length}
                   isPast
                 />
               ))}

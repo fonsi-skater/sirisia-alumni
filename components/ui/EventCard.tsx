@@ -1,15 +1,32 @@
+import { RsvpButton } from './RsvpButton';
+
 const monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
+type MemberOption = { id: string; fullName: string };
+
 type Props = {
+  id: string;
   title: string;
   eventDate: Date;
   location: string | null;
   description: string | null;
   attendeeCount: number;
+  members?: MemberOption[];
+  rsvpMemberIds?: string[];
   isPast?: boolean;
 };
 
-export function EventCard({ title, eventDate, location, description, attendeeCount, isPast }: Props) {
+export function EventCard({
+  id,
+  title,
+  eventDate,
+  location,
+  description,
+  attendeeCount,
+  members = [],
+  rsvpMemberIds = [],
+  isPast,
+}: Props) {
   const day = eventDate.getDate();
   const month = monthNames[eventDate.getMonth()];
   const time = eventDate.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
@@ -33,9 +50,9 @@ export function EventCard({ title, eventDate, location, description, attendeeCou
         <p className="text-sm text-ink/70 font-mono mt-0.5">{time}{location ? ` · ${location}` : ''}</p>
         {description && <p className="text-sm text-ink/80 mt-2">{description}</p>}
         {!isPast && (
-          <button className="mt-3 text-sm font-mono text-blue-dark border border-blue/40 rounded-full px-4 py-1 hover:bg-blue hover:text-parchment transition-colors">
-            RSVP
-          </button>
+          <div className="mt-3">
+            <RsvpButton eventId={id} members={members} rsvpMemberIds={rsvpMemberIds} />
+          </div>
         )}
       </div>
     </div>
