@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { ImageUploadInput } from './ImageUploadInput';
 
 export function AddMemberForm() {
   const router = useRouter();
@@ -96,13 +97,8 @@ export function AddMemberForm() {
           />
         </div>
         <div>
-          <label className="text-xs text-ink/60 block mb-1">Profile picture URL</label>
-          <input
-            placeholder="https://..."
-            value={profilePictureUrl}
-            onChange={(e) => setProfilePictureUrl(e.target.value)}
-            className={inputClass}
-          />
+          <label className="text-xs text-ink/60 block mb-1">Profile picture</label>
+          <ImageUploadInput value={profilePictureUrl} onChange={setProfilePictureUrl} />
         </div>
       </div>
 
