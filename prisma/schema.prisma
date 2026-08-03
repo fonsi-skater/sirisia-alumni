@@ -85,10 +85,11 @@ model Rsvp {
 }
 
 model Photo {
-  id       String @id @default(uuid())
-  event    Event  @relation(fields: [eventId], references: [id])
+  id       String  @id @default(uuid())
+  event    Event   @relation(fields: [eventId], references: [id])
   eventId  String
   imageUrl String
+  caption  String?
 }
 
 model Post {
