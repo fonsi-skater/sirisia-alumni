@@ -34,11 +34,11 @@ export function MobileMenu({ links, admin }: { links: LinkItem[]; admin: boolean
       </button>
 
       <div
-        className={`fixed inset-x-0 top-[65px] z-30 overflow-hidden transition-[max-height] duration-300 ease-out ${
+        className={`fixed inset-x-0 top-[72px] z-30 overflow-hidden transition-[max-height] duration-300 ease-out ${
           open ? 'max-h-[28rem]' : 'max-h-0'
         }`}
       >
-        <nav className="glass-strong mx-4 mt-1 rounded-xl p-4 flex flex-col gap-1 border-b-4 !border-b-pink">
+        <nav className="glass-strong mx-3 sm:mx-4 rounded-2xl p-4 flex flex-col gap-1 border border-white/40">
           {links.map((link) => (
             <Link
               key={link.href}
@@ -75,7 +75,7 @@ export function MobileMenu({ links, admin }: { links: LinkItem[]; admin: boolean
 
       {open && (
         <div
-          className="fixed inset-0 top-[65px] z-20 bg-ink/10"
+          className="fixed inset-0 top-[72px] z-20 bg-ink/10"
           onClick={() => setOpen(false)}
           aria-hidden="true"
         />

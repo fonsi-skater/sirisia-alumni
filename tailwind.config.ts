@@ -10,14 +10,14 @@ const config: Config = {
       colors: {
         parchment: '#F6F3EF',
         blue: {
-          DEFAULT: '#1F4E79',
-          dark: '#163A5C',
-          light: '#4A7FB5',
+          DEFAULT: '#16202E',
+          dark: '#0B121B',
+          light: '#4A6178',
         },
         pink: {
-          DEFAULT: '#C2447E',
-          dark: '#9C3564',
-          light: '#E893B7',
+          DEFAULT: '#E0A526',
+          dark: '#B9840F',
+          light: '#F2D28A',
         },
         ink: '#24232A',
         line: '#DEDAD2',
