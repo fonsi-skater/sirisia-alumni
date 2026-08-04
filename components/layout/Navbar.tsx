@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { isAdmin } from '@/lib/admin-session';
+import { MobileMenu } from './MobileMenu';
 
 const links = [
   { href: '/events', label: 'Events' },
@@ -44,9 +45,7 @@ export function Navbar() {
             </Link>
           )}
         </nav>
-        <button className="md:hidden text-sm" aria-label="Open menu">
-          Menu
-        </button>
+        <MobileMenu links={links} admin={admin} />
       </div>
     </header>
   );
