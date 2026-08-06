@@ -1,7 +1,6 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { Fraunces, Inter, IBM_Plex_Mono } from 'next/font/google';
 import { GlassBackdrop } from '@/components/layout/GlassBackdrop';
-import { Navbar } from '@/components/layout/Navbar';
 import './globals.css';
 
 const fraunces = Fraunces({
@@ -33,7 +32,6 @@ export default function RootLayout({
     <html lang="en" className={`${fraunces.variable} ${inter.variable} ${plexMono.variable}`}>
       <body className="bg-parchment text-ink font-sans" style={{ colorScheme: 'light' }}>
         <GlassBackdrop />
-        <Navbar />
         {children}
       </body>
     </html>
