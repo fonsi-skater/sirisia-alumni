@@ -5,6 +5,11 @@ import { RemovePhotoButton } from '@/components/ui/RemovePhotoButton';
 import { prisma } from '@/lib/db';
 import { isAdmin } from '@/lib/admin-session';
 
+export const metadata = {
+  title: 'Gallery',
+  description: 'Photos from Sirisia Alumni Class gatherings, organized by event.',
+};
+
 export const dynamic = 'force-dynamic';
 
 export default async function GalleryPage() {

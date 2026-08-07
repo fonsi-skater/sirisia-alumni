@@ -5,6 +5,11 @@ import { RemoveMemberButton } from '@/components/ui/RemoveMemberButton';
 import { prisma } from '@/lib/db';
 import { isAdmin } from '@/lib/admin-session';
 
+export const metadata = {
+  title: 'Members',
+  description: 'The member directory for the Sirisia Alumni Class.',
+};
+
 export const dynamic = 'force-dynamic';
 
 const roleStyles: Record<string, string> = {

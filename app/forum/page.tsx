@@ -5,6 +5,11 @@ import { RemovePostButton } from '@/components/ui/RemovePostButton';
 import { prisma } from '@/lib/db';
 import { isAdmin } from '@/lib/admin-session';
 
+export const metadata = {
+  title: 'Forum',
+  description: 'Raise a topic, ask a question, or share news with the Sirisia Alumni Class.',
+};
+
 export const dynamic = 'force-dynamic';
 
 export default async function ForumPage() {

@@ -5,6 +5,11 @@ import { RemoveMeetingButton } from '@/components/ui/RemoveMeetingButton';
 import { prisma } from '@/lib/db';
 import { isAdmin } from '@/lib/admin-session';
 
+export const metadata = {
+  title: 'Meetings',
+  description: 'Join scheduled video calls for the Sirisia Alumni Class — no account or download needed.',
+};
+
 export const dynamic = 'force-dynamic';
 
 export default async function MeetingsPage() {
